@@ -1,0 +1,60 @@
+
+// http://vervex.deviantart.com/art/Somacro-40-300DPI-Social-Media-Icons-267955425
+
+.social-icons
+{
+	@w: 38px;
+	@h: @w;
+	// x-axis: icons
+	// y-axis: states
+	// ORDER
+	// -----------
+	// facebook
+	// twitter
+	// google+
+	// linkedin
+	// pinterest
+	// 
+	display: inline-block;
+
+	&:before, &:after {
+		content: ' ';
+		clear: both;
+		display: table;
+	}
+	a {
+		float: left;
+		margin-right: 4px;
+		//margin-right: 0.5rem;
+		width: @w;
+		height: @h;
+
+		background-image: url('./icon-sprite-38x38.png');
+		background-repeat: no-repeat;
+
+		&.social-facebook {
+			background-position: 0 0;
+			&:hover { background-position: 0 (@h * -1); }
+		}
+		&.social-twitter {
+			background-position: (@w*-1) 0;
+			&:hover { background-position: (@w*-1) (@h * -1); }
+		}
+		&.social-google {
+			background-position: (@w*-2) 0;
+			&:hover { background-position: (@w*-2) (@h * -1); }
+		}
+		&.social-linkedin {
+			background-position: (@w*-3) 0;
+			&:hover { background-position: (@w*-3) (@h * -1); }
+		}
+		&.social-pinterest {
+			background-position: (@w*-4) 0;
+			&:hover { background-position: (@w*-4) (@h * -1); }
+		}
+		&.social-yelp {
+			background-position: (@w*-5) 0;
+			&:hover { background-position: (@w*-5) (@h * -1); }
+		}
+	}
+}
