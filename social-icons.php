@@ -1,34 +1,38 @@
 <?php
 /**
- * Plugin Name: PLX Social Icons
+ * Plugin Name: PL2X Social Icons
  * Description: Add Simple Social icons
  * Author: Evan Mattson (@aaemnnosttv)
- * Author URI: http://aaemnnost.tv
- * Version: 1.0.1
+ * Author URI: https://aaemnnost.tv
+ * Version: 2.0
  */
+
+namespace PL2X;
 
 class SocialIcons
 {
-	const version = '1.0.1';
+	const version = '2.0';
 
-	function __construct()
+	public function __construct()
 	{
-		$this->uri = plugins_url( '', __FILE__ );
+		$this->uri = plugins_url('', __FILE__);
 		$this->dir = plugin_dir_path( __FILE__ );
-
-		add_action( 'init', array(&$this, 'init') );
-		add_action( 'wp_enqueue_scripts', array(&$this, 'enqueue') );
-		add_action( 'pagelines_setup', array(&$this, 'add_social_options') );
 	}
 
-	function init()
+	public function hooks()
 	{
-		wp_register_style( 'social-icons', "{$this->uri}/social-icons.css" , array(), self::version );
-		add_shortcode( 'social_icons', array(&$this, 'shortcode') );
-
+		add_action('init', array($this, 'init'));
+		add_action('wp_enqueue_scripts', array($this, 'enqueue'));
+		add_action('pagelines_setup', array($this, 'add_social_options'));
 	}
 
-	function add_social_options()
+	public function init()
+	{
+		wp_register_style('social-icons', "{$this->uri}/social-icons.css" , array(), self::version);
+		add_shortcode('social_icons', array($this, 'shortcode'));
+	}
+
+	public function add_social_options()
 	{
 		$options = array(
 			'social_profiles' => array(
@@ -44,12 +48,12 @@ class SocialIcons
 		) );
 	}
 
-	function enqueue()
+	public function enqueue()
 	{
-		wp_enqueue_style( 'social-icons' );
+		wp_enqueue_style('social-icons');
 	}
 
-	function shortcode( $atts, $content, $tag )
+	public function shortcode( $atts, $content, $tag )
 	{
 		$data = array();
 		
@@ -71,7 +75,7 @@ class SocialIcons
 		}
 	}
 
-	function get_options()
+	public function get_options()
 	{
 		return array(
 					'facebook_id' => array(
@@ -109,4 +113,15 @@ class SocialIcons
 
 } // SocialIcons
 
-new SocialIcons();
+function pl2x_plugin_social_icons()
+{
+	static $instance;
+
+	if ( ! $instance) {
+		$instance = new SocialIcons();
+	}
+
+	return $instance;
+}
+
+add_action('plugins_loaded', 'pl2x_plugin_social_icons');
