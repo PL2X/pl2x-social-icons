@@ -5,6 +5,8 @@
  * Author: Evan Mattson (@aaemnnosttv)
  * Author URI: https://aaemnnost.tv
  * Version: 2.0
+ * 
+ * GitHub Plugin URI: PL2X/pl2x-social-icons
  */
 
 namespace PL2X;
